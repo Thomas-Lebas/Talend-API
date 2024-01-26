@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xmi:XMI xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:TalendMetadata="http://www.talend.org/metadata/connection/2010" xmlns:orgomg.cwm.resource.relational="http:///orgomg/cwm/resource/relational.ecore">
+  <TalendMetadata:DatabaseConnection xmi:id="_aFST0LxGEe6hyppXorLwkQ" name="Talend_API" id="_3Vxn0LxFEe6hyppXorLwkQ" label="Talend_API" dataPackage="_aF7NALxGEe6hyppXorLwkQ" DatabaseType="MySQL" DriverClass="com.mysql.cj.jdbc.Driver" URL="jdbc:mysql://localhost:3306/Talend_API?noDatetimeStringSync=true&amp;enabledTLSProtocols=TLSv1.2,TLSv1.1,TLSv1" dbVersionString="MYSQL_8" Port="3306" Username="root" Password="" ServerName="localhost" DatasourceName="" FileFieldName="" SID="Talend_API" SqlSynthax="" StringQuote="" NullChar="" DbmsId="mysql_id" ProductId="MYSQL" AdditionalParams="noDatetimeStringSync=true&amp;enabledTLSProtocols=TLSv1.2,TLSv1.1,TLSv1" StandardSQL="true" SQLMode="false" UiSchema="">
+    <taggedValue xmi:id="_aFTh8LxGEe6hyppXorLwkQ" tag="Is Conn Need Reload" value="false"/>
+    <taggedValue xmi:id="_aFnD8LxGEe6hyppXorLwkQ" tag="package filter" value=""/>
+    <taggedValue xmi:id="_aFquULxGEe6hyppXorLwkQ" tag="Status" value=""/>
+    <taggedValue xmi:id="_aFquUbxGEe6hyppXorLwkQ" tag="Version" value="0.1"/>
+    <taggedValue xmi:id="_aFquUrxGEe6hyppXorLwkQ" tag="Purpose" value=""/>
+    <taggedValue xmi:id="_aFquU7xGEe6hyppXorLwkQ" tag="Description" value=""/>
+    <taggedValue xmi:id="_aFquVLxGEe6hyppXorLwkQ" tag="Author" value=""/>
+    <taggedValue xmi:id="_aFquVbxGEe6hyppXorLwkQ" tag="otherParameter"/>
+    <taggedValue xmi:id="_aF2UgLxGEe6hyppXorLwkQ" tag="DB ProductName" value="MySQL"/>
+    <taggedValue xmi:id="_aF2UgbxGEe6hyppXorLwkQ" tag="DB ProductVersion" value="10.4.32-MariaDB"/>
+    <taggedValue xmi:id="_aF2UgrxGEe6hyppXorLwkQ" tag="DB IdentifierQuoteString" value="`"/>
+    <parameters xmi:id="_aFTh8bxGEe6hyppXorLwkQ" key="CONN_PARA_KEY_USERNAME" value="root"/>
+  </TalendMetadata:DatabaseConnection>
+  <orgomg.cwm.resource.relational:Catalog xmi:id="_aF7NALxGEe6hyppXorLwkQ" name="Talend_API" dataManager="_aFST0LxGEe6hyppXorLwkQ"/>
+</xmi:XMI>

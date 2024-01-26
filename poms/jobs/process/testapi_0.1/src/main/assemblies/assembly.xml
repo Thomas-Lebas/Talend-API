@@ -265,7 +265,9 @@
                 <include>org.talend.libraries:wss4j-ws-security-dom-2.3.2:jar:6.0.0</include>
                 <include>org.talend.libraries:wss4j-ws-security-stax-2.3.0:jar:6.0.0</include>
                 <include>org.talend.libraries:opensaml-xmlsec-impl-3.4.5:jar:6.0.0</include>
+                <include>org.talend.libraries:jxl:jar:6.0.0</include>
                 <include>org.talend.libraries:cxf-rt-features-logging-3.4.4:jar:6.0.0</include>
+                <include>org.talend.libraries:sqlitejdbc-v056:jar:6.0.0</include>
                 <include>org.example.test_api.code:routines:jar:8.0.1</include>
                 <include>org.talend.libraries:opensaml-saml-api-3.4.5:jar:6.0.0</include>
                 <include>org.talend.libraries:opensaml-xmlsec-api-3.4.5:jar:6.0.0</include>

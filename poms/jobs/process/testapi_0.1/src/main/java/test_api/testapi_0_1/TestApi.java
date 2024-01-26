@@ -314,7 +314,47 @@ public class TestApi implements TalendJob {
 		tFileInputDelimited_1_onSubJobError(exception, errorComponent, globalMap);
 	}
 
+	public void tMap_1_error(Exception exception, String errorComponent, final java.util.Map<String, Object> globalMap)
+			throws TalendException {
+
+		end_Hash.put(errorComponent, System.currentTimeMillis());
+
+		status = "failure";
+
+		tFileInputDelimited_1_onSubJobError(exception, errorComponent, globalMap);
+	}
+
 	public void tLogRow_1_error(Exception exception, String errorComponent,
+			final java.util.Map<String, Object> globalMap) throws TalendException {
+
+		end_Hash.put(errorComponent, System.currentTimeMillis());
+
+		status = "failure";
+
+		tFileInputDelimited_1_onSubJobError(exception, errorComponent, globalMap);
+	}
+
+	public void tReplicate_1_error(Exception exception, String errorComponent,
+			final java.util.Map<String, Object> globalMap) throws TalendException {
+
+		end_Hash.put(errorComponent, System.currentTimeMillis());
+
+		status = "failure";
+
+		tFileInputDelimited_1_onSubJobError(exception, errorComponent, globalMap);
+	}
+
+	public void tFileOutputExcel_1_error(Exception exception, String errorComponent,
+			final java.util.Map<String, Object> globalMap) throws TalendException {
+
+		end_Hash.put(errorComponent, System.currentTimeMillis());
+
+		status = "failure";
+
+		tFileInputDelimited_1_onSubJobError(exception, errorComponent, globalMap);
+	}
+
+	public void tDBOutput_2_error(Exception exception, String errorComponent,
 			final java.util.Map<String, Object> globalMap) throws TalendException {
 
 		end_Hash.put(errorComponent, System.currentTimeMillis());
@@ -332,9 +372,21 @@ public class TestApi implements TalendJob {
 
 	}
 
-	public static class row2Struct implements routines.system.IPersistableRow<row2Struct> {
+	public static class row5Struct implements routines.system.IPersistableRow<row5Struct> {
 		final static byte[] commonByteArrayLock_TEST_API_TestApi = new byte[0];
 		static byte[] commonByteArray_TEST_API_TestApi = new byte[0];
+		protected static final int DEFAULT_HASHCODE = 1;
+		protected static final int PRIME = 31;
+		protected int hashCode = DEFAULT_HASHCODE;
+		public boolean hashCodeDirty = true;
+
+		public String loopKey;
+
+		public int IdDrink;
+
+		public int getIdDrink() {
+			return this.IdDrink;
+		}
 
 		public String Name;
 
@@ -364,6 +416,67 @@ public class TestApi implements TalendJob {
 
 		public String getInstructions() {
 			return this.Instructions;
+		}
+
+		public String Image;
+
+		public String getImage() {
+			return this.Image;
+		}
+
+		public List IngredientList;
+
+		public List getIngredientList() {
+			return this.IngredientList;
+		}
+
+		@Override
+		public int hashCode() {
+			if (this.hashCodeDirty) {
+				final int prime = PRIME;
+				int result = DEFAULT_HASHCODE;
+
+				result = prime * result + (int) this.IdDrink;
+
+				this.hashCode = result;
+				this.hashCodeDirty = false;
+			}
+			return this.hashCode;
+		}
+
+		@Override
+		public boolean equals(Object obj) {
+			if (this == obj)
+				return true;
+			if (obj == null)
+				return false;
+			if (getClass() != obj.getClass())
+				return false;
+			final row5Struct other = (row5Struct) obj;
+
+			if (this.IdDrink != other.IdDrink)
+				return false;
+
+			return true;
+		}
+
+		public void copyDataTo(row5Struct other) {
+
+			other.IdDrink = this.IdDrink;
+			other.Name = this.Name;
+			other.Category = this.Category;
+			other.Alcoholic = this.Alcoholic;
+			other.Glass = this.Glass;
+			other.Instructions = this.Instructions;
+			other.Image = this.Image;
+			other.IngredientList = this.IngredientList;
+
+		}
+
+		public void copyKeysDataTo(row5Struct other) {
+
+			other.IdDrink = this.IdDrink;
+
 		}
 
 		private String readString(ObjectInputStream dis) throws IOException {
@@ -434,6 +547,8 @@ public class TestApi implements TalendJob {
 
 					int length = 0;
 
+					this.IdDrink = dis.readInt();
+
 					this.Name = readString(dis);
 
 					this.Category = readString(dis);
@@ -444,8 +559,15 @@ public class TestApi implements TalendJob {
 
 					this.Instructions = readString(dis);
 
+					this.Image = readString(dis);
+
+					this.IngredientList = (List) dis.readObject();
+
 				} catch (IOException e) {
 					throw new RuntimeException(e);
+
+				} catch (ClassNotFoundException eCNFE) {
+					throw new RuntimeException(eCNFE);
 
 				}
 
@@ -461,6 +583,8 @@ public class TestApi implements TalendJob {
 
 					int length = 0;
 
+					this.IdDrink = dis.readInt();
+
 					this.Name = readString(dis);
 
 					this.Category = readString(dis);
@@ -471,8 +595,15 @@ public class TestApi implements TalendJob {
 
 					this.Instructions = readString(dis);
 
+					this.Image = readString(dis);
+
+					this.IngredientList = (List) dis.readObject();
+
 				} catch (IOException e) {
 					throw new RuntimeException(e);
+
+				} catch (ClassNotFoundException eCNFE) {
+					throw new RuntimeException(eCNFE);
 
 				}
 
@@ -483,6 +614,10 @@ public class TestApi implements TalendJob {
 		public void writeData(ObjectOutputStream dos) {
 			try {
 
+				// int
+
+				dos.writeInt(this.IdDrink);
+
 				// String
 
 				writeString(this.Name, dos);
@@ -502,6 +637,14 @@ public class TestApi implements TalendJob {
 				// String
 
 				writeString(this.Instructions, dos);
+
+				// String
+
+				writeString(this.Image, dos);
+
+				// List
+
+				dos.writeObject(this.IngredientList);
 
 			} catch (IOException e) {
 				throw new RuntimeException(e);
@@ -512,6 +655,10 @@ public class TestApi implements TalendJob {
 		public void writeData(org.jboss.marshalling.Marshaller dos) {
 			try {
 
+				// int
+
+				dos.writeInt(this.IdDrink);
+
 				// String
 
 				writeString(this.Name, dos);
@@ -531,6 +678,14 @@ public class TestApi implements TalendJob {
 				// String
 
 				writeString(this.Instructions, dos);
+
+				// String
+
+				writeString(this.Image, dos);
+
+				// List
+
+				dos.writeObject(this.IngredientList);
 
 			} catch (IOException e) {
 				throw new RuntimeException(e);
@@ -543,11 +698,1486 @@ public class TestApi implements TalendJob {
 			StringBuilder sb = new StringBuilder();
 			sb.append(super.toString());
 			sb.append("[");
-			sb.append("Name=" + Name);
+			sb.append("IdDrink=" + String.valueOf(IdDrink));
+			sb.append(",Name=" + Name);
 			sb.append(",Category=" + Category);
 			sb.append(",Alcoholic=" + Alcoholic);
 			sb.append(",Glass=" + Glass);
 			sb.append(",Instructions=" + Instructions);
+			sb.append(",Image=" + Image);
+			sb.append(",IngredientList=" + String.valueOf(IngredientList));
+			sb.append("]");
+
+			return sb.toString();
+		}
+
+		/**
+		 * Compare keys
+		 */
+		public int compareTo(row5Struct other) {
+
+			int returnValue = -1;
+
+			returnValue = checkNullsAndCompare(this.IdDrink, other.IdDrink);
+			if (returnValue != 0) {
+				return returnValue;
+			}
+
+			return returnValue;
+		}
+
+		private int checkNullsAndCompare(Object object1, Object object2) {
+			int returnValue = 0;
+			if (object1 instanceof Comparable && object2 instanceof Comparable) {
+				returnValue = ((Comparable) object1).compareTo(object2);
+			} else if (object1 != null && object2 != null) {
+				returnValue = compareStrings(object1.toString(), object2.toString());
+			} else if (object1 == null && object2 != null) {
+				returnValue = 1;
+			} else if (object1 != null && object2 == null) {
+				returnValue = -1;
+			} else {
+				returnValue = 0;
+			}
+
+			return returnValue;
+		}
+
+		private int compareStrings(String string1, String string2) {
+			return string1.compareTo(string2);
+		}
+
+	}
+
+	public static class row6Struct implements routines.system.IPersistableRow<row6Struct> {
+		final static byte[] commonByteArrayLock_TEST_API_TestApi = new byte[0];
+		static byte[] commonByteArray_TEST_API_TestApi = new byte[0];
+		protected static final int DEFAULT_HASHCODE = 1;
+		protected static final int PRIME = 31;
+		protected int hashCode = DEFAULT_HASHCODE;
+		public boolean hashCodeDirty = true;
+
+		public String loopKey;
+
+		public int IdDrink;
+
+		public int getIdDrink() {
+			return this.IdDrink;
+		}
+
+		public String Name;
+
+		public String getName() {
+			return this.Name;
+		}
+
+		public String Category;
+
+		public String getCategory() {
+			return this.Category;
+		}
+
+		public String Alcoholic;
+
+		public String getAlcoholic() {
+			return this.Alcoholic;
+		}
+
+		public String Glass;
+
+		public String getGlass() {
+			return this.Glass;
+		}
+
+		public String Instructions;
+
+		public String getInstructions() {
+			return this.Instructions;
+		}
+
+		public String Image;
+
+		public String getImage() {
+			return this.Image;
+		}
+
+		public List IngredientList;
+
+		public List getIngredientList() {
+			return this.IngredientList;
+		}
+
+		@Override
+		public int hashCode() {
+			if (this.hashCodeDirty) {
+				final int prime = PRIME;
+				int result = DEFAULT_HASHCODE;
+
+				result = prime * result + (int) this.IdDrink;
+
+				this.hashCode = result;
+				this.hashCodeDirty = false;
+			}
+			return this.hashCode;
+		}
+
+		@Override
+		public boolean equals(Object obj) {
+			if (this == obj)
+				return true;
+			if (obj == null)
+				return false;
+			if (getClass() != obj.getClass())
+				return false;
+			final row6Struct other = (row6Struct) obj;
+
+			if (this.IdDrink != other.IdDrink)
+				return false;
+
+			return true;
+		}
+
+		public void copyDataTo(row6Struct other) {
+
+			other.IdDrink = this.IdDrink;
+			other.Name = this.Name;
+			other.Category = this.Category;
+			other.Alcoholic = this.Alcoholic;
+			other.Glass = this.Glass;
+			other.Instructions = this.Instructions;
+			other.Image = this.Image;
+			other.IngredientList = this.IngredientList;
+
+		}
+
+		public void copyKeysDataTo(row6Struct other) {
+
+			other.IdDrink = this.IdDrink;
+
+		}
+
+		private String readString(ObjectInputStream dis) throws IOException {
+			String strReturn = null;
+			int length = 0;
+			length = dis.readInt();
+			if (length == -1) {
+				strReturn = null;
+			} else {
+				if (length > commonByteArray_TEST_API_TestApi.length) {
+					if (length < 1024 && commonByteArray_TEST_API_TestApi.length == 0) {
+						commonByteArray_TEST_API_TestApi = new byte[1024];
+					} else {
+						commonByteArray_TEST_API_TestApi = new byte[2 * length];
+					}
+				}
+				dis.readFully(commonByteArray_TEST_API_TestApi, 0, length);
+				strReturn = new String(commonByteArray_TEST_API_TestApi, 0, length, utf8Charset);
+			}
+			return strReturn;
+		}
+
+		private String readString(org.jboss.marshalling.Unmarshaller unmarshaller) throws IOException {
+			String strReturn = null;
+			int length = 0;
+			length = unmarshaller.readInt();
+			if (length == -1) {
+				strReturn = null;
+			} else {
+				if (length > commonByteArray_TEST_API_TestApi.length) {
+					if (length < 1024 && commonByteArray_TEST_API_TestApi.length == 0) {
+						commonByteArray_TEST_API_TestApi = new byte[1024];
+					} else {
+						commonByteArray_TEST_API_TestApi = new byte[2 * length];
+					}
+				}
+				unmarshaller.readFully(commonByteArray_TEST_API_TestApi, 0, length);
+				strReturn = new String(commonByteArray_TEST_API_TestApi, 0, length, utf8Charset);
+			}
+			return strReturn;
+		}
+
+		private void writeString(String str, ObjectOutputStream dos) throws IOException {
+			if (str == null) {
+				dos.writeInt(-1);
+			} else {
+				byte[] byteArray = str.getBytes(utf8Charset);
+				dos.writeInt(byteArray.length);
+				dos.write(byteArray);
+			}
+		}
+
+		private void writeString(String str, org.jboss.marshalling.Marshaller marshaller) throws IOException {
+			if (str == null) {
+				marshaller.writeInt(-1);
+			} else {
+				byte[] byteArray = str.getBytes(utf8Charset);
+				marshaller.writeInt(byteArray.length);
+				marshaller.write(byteArray);
+			}
+		}
+
+		public void readData(ObjectInputStream dis) {
+
+			synchronized (commonByteArrayLock_TEST_API_TestApi) {
+
+				try {
+
+					int length = 0;
+
+					this.IdDrink = dis.readInt();
+
+					this.Name = readString(dis);
+
+					this.Category = readString(dis);
+
+					this.Alcoholic = readString(dis);
+
+					this.Glass = readString(dis);
+
+					this.Instructions = readString(dis);
+
+					this.Image = readString(dis);
+
+					this.IngredientList = (List) dis.readObject();
+
+				} catch (IOException e) {
+					throw new RuntimeException(e);
+
+				} catch (ClassNotFoundException eCNFE) {
+					throw new RuntimeException(eCNFE);
+
+				}
+
+			}
+
+		}
+
+		public void readData(org.jboss.marshalling.Unmarshaller dis) {
+
+			synchronized (commonByteArrayLock_TEST_API_TestApi) {
+
+				try {
+
+					int length = 0;
+
+					this.IdDrink = dis.readInt();
+
+					this.Name = readString(dis);
+
+					this.Category = readString(dis);
+
+					this.Alcoholic = readString(dis);
+
+					this.Glass = readString(dis);
+
+					this.Instructions = readString(dis);
+
+					this.Image = readString(dis);
+
+					this.IngredientList = (List) dis.readObject();
+
+				} catch (IOException e) {
+					throw new RuntimeException(e);
+
+				} catch (ClassNotFoundException eCNFE) {
+					throw new RuntimeException(eCNFE);
+
+				}
+
+			}
+
+		}
+
+		public void writeData(ObjectOutputStream dos) {
+			try {
+
+				// int
+
+				dos.writeInt(this.IdDrink);
+
+				// String
+
+				writeString(this.Name, dos);
+
+				// String
+
+				writeString(this.Category, dos);
+
+				// String
+
+				writeString(this.Alcoholic, dos);
+
+				// String
+
+				writeString(this.Glass, dos);
+
+				// String
+
+				writeString(this.Instructions, dos);
+
+				// String
+
+				writeString(this.Image, dos);
+
+				// List
+
+				dos.writeObject(this.IngredientList);
+
+			} catch (IOException e) {
+				throw new RuntimeException(e);
+			}
+
+		}
+
+		public void writeData(org.jboss.marshalling.Marshaller dos) {
+			try {
+
+				// int
+
+				dos.writeInt(this.IdDrink);
+
+				// String
+
+				writeString(this.Name, dos);
+
+				// String
+
+				writeString(this.Category, dos);
+
+				// String
+
+				writeString(this.Alcoholic, dos);
+
+				// String
+
+				writeString(this.Glass, dos);
+
+				// String
+
+				writeString(this.Instructions, dos);
+
+				// String
+
+				writeString(this.Image, dos);
+
+				// List
+
+				dos.writeObject(this.IngredientList);
+
+			} catch (IOException e) {
+				throw new RuntimeException(e);
+			}
+
+		}
+
+		public String toString() {
+
+			StringBuilder sb = new StringBuilder();
+			sb.append(super.toString());
+			sb.append("[");
+			sb.append("IdDrink=" + String.valueOf(IdDrink));
+			sb.append(",Name=" + Name);
+			sb.append(",Category=" + Category);
+			sb.append(",Alcoholic=" + Alcoholic);
+			sb.append(",Glass=" + Glass);
+			sb.append(",Instructions=" + Instructions);
+			sb.append(",Image=" + Image);
+			sb.append(",IngredientList=" + String.valueOf(IngredientList));
+			sb.append("]");
+
+			return sb.toString();
+		}
+
+		/**
+		 * Compare keys
+		 */
+		public int compareTo(row6Struct other) {
+
+			int returnValue = -1;
+
+			returnValue = checkNullsAndCompare(this.IdDrink, other.IdDrink);
+			if (returnValue != 0) {
+				return returnValue;
+			}
+
+			return returnValue;
+		}
+
+		private int checkNullsAndCompare(Object object1, Object object2) {
+			int returnValue = 0;
+			if (object1 instanceof Comparable && object2 instanceof Comparable) {
+				returnValue = ((Comparable) object1).compareTo(object2);
+			} else if (object1 != null && object2 != null) {
+				returnValue = compareStrings(object1.toString(), object2.toString());
+			} else if (object1 == null && object2 != null) {
+				returnValue = 1;
+			} else if (object1 != null && object2 == null) {
+				returnValue = -1;
+			} else {
+				returnValue = 0;
+			}
+
+			return returnValue;
+		}
+
+		private int compareStrings(String string1, String string2) {
+			return string1.compareTo(string2);
+		}
+
+	}
+
+	public static class row4Struct implements routines.system.IPersistableRow<row4Struct> {
+		final static byte[] commonByteArrayLock_TEST_API_TestApi = new byte[0];
+		static byte[] commonByteArray_TEST_API_TestApi = new byte[0];
+		protected static final int DEFAULT_HASHCODE = 1;
+		protected static final int PRIME = 31;
+		protected int hashCode = DEFAULT_HASHCODE;
+		public boolean hashCodeDirty = true;
+
+		public String loopKey;
+
+		public int IdDrink;
+
+		public int getIdDrink() {
+			return this.IdDrink;
+		}
+
+		public String Name;
+
+		public String getName() {
+			return this.Name;
+		}
+
+		public String Category;
+
+		public String getCategory() {
+			return this.Category;
+		}
+
+		public String Alcoholic;
+
+		public String getAlcoholic() {
+			return this.Alcoholic;
+		}
+
+		public String Glass;
+
+		public String getGlass() {
+			return this.Glass;
+		}
+
+		public String Instructions;
+
+		public String getInstructions() {
+			return this.Instructions;
+		}
+
+		public String Image;
+
+		public String getImage() {
+			return this.Image;
+		}
+
+		public List IngredientList;
+
+		public List getIngredientList() {
+			return this.IngredientList;
+		}
+
+		@Override
+		public int hashCode() {
+			if (this.hashCodeDirty) {
+				final int prime = PRIME;
+				int result = DEFAULT_HASHCODE;
+
+				result = prime * result + (int) this.IdDrink;
+
+				this.hashCode = result;
+				this.hashCodeDirty = false;
+			}
+			return this.hashCode;
+		}
+
+		@Override
+		public boolean equals(Object obj) {
+			if (this == obj)
+				return true;
+			if (obj == null)
+				return false;
+			if (getClass() != obj.getClass())
+				return false;
+			final row4Struct other = (row4Struct) obj;
+
+			if (this.IdDrink != other.IdDrink)
+				return false;
+
+			return true;
+		}
+
+		public void copyDataTo(row4Struct other) {
+
+			other.IdDrink = this.IdDrink;
+			other.Name = this.Name;
+			other.Category = this.Category;
+			other.Alcoholic = this.Alcoholic;
+			other.Glass = this.Glass;
+			other.Instructions = this.Instructions;
+			other.Image = this.Image;
+			other.IngredientList = this.IngredientList;
+
+		}
+
+		public void copyKeysDataTo(row4Struct other) {
+
+			other.IdDrink = this.IdDrink;
+
+		}
+
+		private String readString(ObjectInputStream dis) throws IOException {
+			String strReturn = null;
+			int length = 0;
+			length = dis.readInt();
+			if (length == -1) {
+				strReturn = null;
+			} else {
+				if (length > commonByteArray_TEST_API_TestApi.length) {
+					if (length < 1024 && commonByteArray_TEST_API_TestApi.length == 0) {
+						commonByteArray_TEST_API_TestApi = new byte[1024];
+					} else {
+						commonByteArray_TEST_API_TestApi = new byte[2 * length];
+					}
+				}
+				dis.readFully(commonByteArray_TEST_API_TestApi, 0, length);
+				strReturn = new String(commonByteArray_TEST_API_TestApi, 0, length, utf8Charset);
+			}
+			return strReturn;
+		}
+
+		private String readString(org.jboss.marshalling.Unmarshaller unmarshaller) throws IOException {
+			String strReturn = null;
+			int length = 0;
+			length = unmarshaller.readInt();
+			if (length == -1) {
+				strReturn = null;
+			} else {
+				if (length > commonByteArray_TEST_API_TestApi.length) {
+					if (length < 1024 && commonByteArray_TEST_API_TestApi.length == 0) {
+						commonByteArray_TEST_API_TestApi = new byte[1024];
+					} else {
+						commonByteArray_TEST_API_TestApi = new byte[2 * length];
+					}
+				}
+				unmarshaller.readFully(commonByteArray_TEST_API_TestApi, 0, length);
+				strReturn = new String(commonByteArray_TEST_API_TestApi, 0, length, utf8Charset);
+			}
+			return strReturn;
+		}
+
+		private void writeString(String str, ObjectOutputStream dos) throws IOException {
+			if (str == null) {
+				dos.writeInt(-1);
+			} else {
+				byte[] byteArray = str.getBytes(utf8Charset);
+				dos.writeInt(byteArray.length);
+				dos.write(byteArray);
+			}
+		}
+
+		private void writeString(String str, org.jboss.marshalling.Marshaller marshaller) throws IOException {
+			if (str == null) {
+				marshaller.writeInt(-1);
+			} else {
+				byte[] byteArray = str.getBytes(utf8Charset);
+				marshaller.writeInt(byteArray.length);
+				marshaller.write(byteArray);
+			}
+		}
+
+		public void readData(ObjectInputStream dis) {
+
+			synchronized (commonByteArrayLock_TEST_API_TestApi) {
+
+				try {
+
+					int length = 0;
+
+					this.IdDrink = dis.readInt();
+
+					this.Name = readString(dis);
+
+					this.Category = readString(dis);
+
+					this.Alcoholic = readString(dis);
+
+					this.Glass = readString(dis);
+
+					this.Instructions = readString(dis);
+
+					this.Image = readString(dis);
+
+					this.IngredientList = (List) dis.readObject();
+
+				} catch (IOException e) {
+					throw new RuntimeException(e);
+
+				} catch (ClassNotFoundException eCNFE) {
+					throw new RuntimeException(eCNFE);
+
+				}
+
+			}
+
+		}
+
+		public void readData(org.jboss.marshalling.Unmarshaller dis) {
+
+			synchronized (commonByteArrayLock_TEST_API_TestApi) {
+
+				try {
+
+					int length = 0;
+
+					this.IdDrink = dis.readInt();
+
+					this.Name = readString(dis);
+
+					this.Category = readString(dis);
+
+					this.Alcoholic = readString(dis);
+
+					this.Glass = readString(dis);
+
+					this.Instructions = readString(dis);
+
+					this.Image = readString(dis);
+
+					this.IngredientList = (List) dis.readObject();
+
+				} catch (IOException e) {
+					throw new RuntimeException(e);
+
+				} catch (ClassNotFoundException eCNFE) {
+					throw new RuntimeException(eCNFE);
+
+				}
+
+			}
+
+		}
+
+		public void writeData(ObjectOutputStream dos) {
+			try {
+
+				// int
+
+				dos.writeInt(this.IdDrink);
+
+				// String
+
+				writeString(this.Name, dos);
+
+				// String
+
+				writeString(this.Category, dos);
+
+				// String
+
+				writeString(this.Alcoholic, dos);
+
+				// String
+
+				writeString(this.Glass, dos);
+
+				// String
+
+				writeString(this.Instructions, dos);
+
+				// String
+
+				writeString(this.Image, dos);
+
+				// List
+
+				dos.writeObject(this.IngredientList);
+
+			} catch (IOException e) {
+				throw new RuntimeException(e);
+			}
+
+		}
+
+		public void writeData(org.jboss.marshalling.Marshaller dos) {
+			try {
+
+				// int
+
+				dos.writeInt(this.IdDrink);
+
+				// String
+
+				writeString(this.Name, dos);
+
+				// String
+
+				writeString(this.Category, dos);
+
+				// String
+
+				writeString(this.Alcoholic, dos);
+
+				// String
+
+				writeString(this.Glass, dos);
+
+				// String
+
+				writeString(this.Instructions, dos);
+
+				// String
+
+				writeString(this.Image, dos);
+
+				// List
+
+				dos.writeObject(this.IngredientList);
+
+			} catch (IOException e) {
+				throw new RuntimeException(e);
+			}
+
+		}
+
+		public String toString() {
+
+			StringBuilder sb = new StringBuilder();
+			sb.append(super.toString());
+			sb.append("[");
+			sb.append("IdDrink=" + String.valueOf(IdDrink));
+			sb.append(",Name=" + Name);
+			sb.append(",Category=" + Category);
+			sb.append(",Alcoholic=" + Alcoholic);
+			sb.append(",Glass=" + Glass);
+			sb.append(",Instructions=" + Instructions);
+			sb.append(",Image=" + Image);
+			sb.append(",IngredientList=" + String.valueOf(IngredientList));
+			sb.append("]");
+
+			return sb.toString();
+		}
+
+		/**
+		 * Compare keys
+		 */
+		public int compareTo(row4Struct other) {
+
+			int returnValue = -1;
+
+			returnValue = checkNullsAndCompare(this.IdDrink, other.IdDrink);
+			if (returnValue != 0) {
+				return returnValue;
+			}
+
+			return returnValue;
+		}
+
+		private int checkNullsAndCompare(Object object1, Object object2) {
+			int returnValue = 0;
+			if (object1 instanceof Comparable && object2 instanceof Comparable) {
+				returnValue = ((Comparable) object1).compareTo(object2);
+			} else if (object1 != null && object2 != null) {
+				returnValue = compareStrings(object1.toString(), object2.toString());
+			} else if (object1 == null && object2 != null) {
+				returnValue = 1;
+			} else if (object1 != null && object2 == null) {
+				returnValue = -1;
+			} else {
+				returnValue = 0;
+			}
+
+			return returnValue;
+		}
+
+		private int compareStrings(String string1, String string2) {
+			return string1.compareTo(string2);
+		}
+
+	}
+
+	public static class testStruct implements routines.system.IPersistableRow<testStruct> {
+		final static byte[] commonByteArrayLock_TEST_API_TestApi = new byte[0];
+		static byte[] commonByteArray_TEST_API_TestApi = new byte[0];
+		protected static final int DEFAULT_HASHCODE = 1;
+		protected static final int PRIME = 31;
+		protected int hashCode = DEFAULT_HASHCODE;
+		public boolean hashCodeDirty = true;
+
+		public String loopKey;
+
+		public int IdDrink;
+
+		public int getIdDrink() {
+			return this.IdDrink;
+		}
+
+		public String Name;
+
+		public String getName() {
+			return this.Name;
+		}
+
+		public String Category;
+
+		public String getCategory() {
+			return this.Category;
+		}
+
+		public String Alcoholic;
+
+		public String getAlcoholic() {
+			return this.Alcoholic;
+		}
+
+		public String Glass;
+
+		public String getGlass() {
+			return this.Glass;
+		}
+
+		public String Instructions;
+
+		public String getInstructions() {
+			return this.Instructions;
+		}
+
+		public String Image;
+
+		public String getImage() {
+			return this.Image;
+		}
+
+		public List IngredientList;
+
+		public List getIngredientList() {
+			return this.IngredientList;
+		}
+
+		@Override
+		public int hashCode() {
+			if (this.hashCodeDirty) {
+				final int prime = PRIME;
+				int result = DEFAULT_HASHCODE;
+
+				result = prime * result + (int) this.IdDrink;
+
+				this.hashCode = result;
+				this.hashCodeDirty = false;
+			}
+			return this.hashCode;
+		}
+
+		@Override
+		public boolean equals(Object obj) {
+			if (this == obj)
+				return true;
+			if (obj == null)
+				return false;
+			if (getClass() != obj.getClass())
+				return false;
+			final testStruct other = (testStruct) obj;
+
+			if (this.IdDrink != other.IdDrink)
+				return false;
+
+			return true;
+		}
+
+		public void copyDataTo(testStruct other) {
+
+			other.IdDrink = this.IdDrink;
+			other.Name = this.Name;
+			other.Category = this.Category;
+			other.Alcoholic = this.Alcoholic;
+			other.Glass = this.Glass;
+			other.Instructions = this.Instructions;
+			other.Image = this.Image;
+			other.IngredientList = this.IngredientList;
+
+		}
+
+		public void copyKeysDataTo(testStruct other) {
+
+			other.IdDrink = this.IdDrink;
+
+		}
+
+		private String readString(ObjectInputStream dis) throws IOException {
+			String strReturn = null;
+			int length = 0;
+			length = dis.readInt();
+			if (length == -1) {
+				strReturn = null;
+			} else {
+				if (length > commonByteArray_TEST_API_TestApi.length) {
+					if (length < 1024 && commonByteArray_TEST_API_TestApi.length == 0) {
+						commonByteArray_TEST_API_TestApi = new byte[1024];
+					} else {
+						commonByteArray_TEST_API_TestApi = new byte[2 * length];
+					}
+				}
+				dis.readFully(commonByteArray_TEST_API_TestApi, 0, length);
+				strReturn = new String(commonByteArray_TEST_API_TestApi, 0, length, utf8Charset);
+			}
+			return strReturn;
+		}
+
+		private String readString(org.jboss.marshalling.Unmarshaller unmarshaller) throws IOException {
+			String strReturn = null;
+			int length = 0;
+			length = unmarshaller.readInt();
+			if (length == -1) {
+				strReturn = null;
+			} else {
+				if (length > commonByteArray_TEST_API_TestApi.length) {
+					if (length < 1024 && commonByteArray_TEST_API_TestApi.length == 0) {
+						commonByteArray_TEST_API_TestApi = new byte[1024];
+					} else {
+						commonByteArray_TEST_API_TestApi = new byte[2 * length];
+					}
+				}
+				unmarshaller.readFully(commonByteArray_TEST_API_TestApi, 0, length);
+				strReturn = new String(commonByteArray_TEST_API_TestApi, 0, length, utf8Charset);
+			}
+			return strReturn;
+		}
+
+		private void writeString(String str, ObjectOutputStream dos) throws IOException {
+			if (str == null) {
+				dos.writeInt(-1);
+			} else {
+				byte[] byteArray = str.getBytes(utf8Charset);
+				dos.writeInt(byteArray.length);
+				dos.write(byteArray);
+			}
+		}
+
+		private void writeString(String str, org.jboss.marshalling.Marshaller marshaller) throws IOException {
+			if (str == null) {
+				marshaller.writeInt(-1);
+			} else {
+				byte[] byteArray = str.getBytes(utf8Charset);
+				marshaller.writeInt(byteArray.length);
+				marshaller.write(byteArray);
+			}
+		}
+
+		public void readData(ObjectInputStream dis) {
+
+			synchronized (commonByteArrayLock_TEST_API_TestApi) {
+
+				try {
+
+					int length = 0;
+
+					this.IdDrink = dis.readInt();
+
+					this.Name = readString(dis);
+
+					this.Category = readString(dis);
+
+					this.Alcoholic = readString(dis);
+
+					this.Glass = readString(dis);
+
+					this.Instructions = readString(dis);
+
+					this.Image = readString(dis);
+
+					this.IngredientList = (List) dis.readObject();
+
+				} catch (IOException e) {
+					throw new RuntimeException(e);
+
+				} catch (ClassNotFoundException eCNFE) {
+					throw new RuntimeException(eCNFE);
+
+				}
+
+			}
+
+		}
+
+		public void readData(org.jboss.marshalling.Unmarshaller dis) {
+
+			synchronized (commonByteArrayLock_TEST_API_TestApi) {
+
+				try {
+
+					int length = 0;
+
+					this.IdDrink = dis.readInt();
+
+					this.Name = readString(dis);
+
+					this.Category = readString(dis);
+
+					this.Alcoholic = readString(dis);
+
+					this.Glass = readString(dis);
+
+					this.Instructions = readString(dis);
+
+					this.Image = readString(dis);
+
+					this.IngredientList = (List) dis.readObject();
+
+				} catch (IOException e) {
+					throw new RuntimeException(e);
+
+				} catch (ClassNotFoundException eCNFE) {
+					throw new RuntimeException(eCNFE);
+
+				}
+
+			}
+
+		}
+
+		public void writeData(ObjectOutputStream dos) {
+			try {
+
+				// int
+
+				dos.writeInt(this.IdDrink);
+
+				// String
+
+				writeString(this.Name, dos);
+
+				// String
+
+				writeString(this.Category, dos);
+
+				// String
+
+				writeString(this.Alcoholic, dos);
+
+				// String
+
+				writeString(this.Glass, dos);
+
+				// String
+
+				writeString(this.Instructions, dos);
+
+				// String
+
+				writeString(this.Image, dos);
+
+				// List
+
+				dos.writeObject(this.IngredientList);
+
+			} catch (IOException e) {
+				throw new RuntimeException(e);
+			}
+
+		}
+
+		public void writeData(org.jboss.marshalling.Marshaller dos) {
+			try {
+
+				// int
+
+				dos.writeInt(this.IdDrink);
+
+				// String
+
+				writeString(this.Name, dos);
+
+				// String
+
+				writeString(this.Category, dos);
+
+				// String
+
+				writeString(this.Alcoholic, dos);
+
+				// String
+
+				writeString(this.Glass, dos);
+
+				// String
+
+				writeString(this.Instructions, dos);
+
+				// String
+
+				writeString(this.Image, dos);
+
+				// List
+
+				dos.writeObject(this.IngredientList);
+
+			} catch (IOException e) {
+				throw new RuntimeException(e);
+			}
+
+		}
+
+		public String toString() {
+
+			StringBuilder sb = new StringBuilder();
+			sb.append(super.toString());
+			sb.append("[");
+			sb.append("IdDrink=" + String.valueOf(IdDrink));
+			sb.append(",Name=" + Name);
+			sb.append(",Category=" + Category);
+			sb.append(",Alcoholic=" + Alcoholic);
+			sb.append(",Glass=" + Glass);
+			sb.append(",Instructions=" + Instructions);
+			sb.append(",Image=" + Image);
+			sb.append(",IngredientList=" + String.valueOf(IngredientList));
+			sb.append("]");
+
+			return sb.toString();
+		}
+
+		/**
+		 * Compare keys
+		 */
+		public int compareTo(testStruct other) {
+
+			int returnValue = -1;
+
+			returnValue = checkNullsAndCompare(this.IdDrink, other.IdDrink);
+			if (returnValue != 0) {
+				return returnValue;
+			}
+
+			return returnValue;
+		}
+
+		private int checkNullsAndCompare(Object object1, Object object2) {
+			int returnValue = 0;
+			if (object1 instanceof Comparable && object2 instanceof Comparable) {
+				returnValue = ((Comparable) object1).compareTo(object2);
+			} else if (object1 != null && object2 != null) {
+				returnValue = compareStrings(object1.toString(), object2.toString());
+			} else if (object1 == null && object2 != null) {
+				returnValue = 1;
+			} else if (object1 != null && object2 == null) {
+				returnValue = -1;
+			} else {
+				returnValue = 0;
+			}
+
+			return returnValue;
+		}
+
+		private int compareStrings(String string1, String string2) {
+			return string1.compareTo(string2);
+		}
+
+	}
+
+	public static class row2Struct implements routines.system.IPersistableRow<row2Struct> {
+		final static byte[] commonByteArrayLock_TEST_API_TestApi = new byte[0];
+		static byte[] commonByteArray_TEST_API_TestApi = new byte[0];
+
+		public int IdDrink;
+
+		public int getIdDrink() {
+			return this.IdDrink;
+		}
+
+		public String Name;
+
+		public String getName() {
+			return this.Name;
+		}
+
+		public String Category;
+
+		public String getCategory() {
+			return this.Category;
+		}
+
+		public String Alcoholic;
+
+		public String getAlcoholic() {
+			return this.Alcoholic;
+		}
+
+		public String Glass;
+
+		public String getGlass() {
+			return this.Glass;
+		}
+
+		public String Instructions;
+
+		public String getInstructions() {
+			return this.Instructions;
+		}
+
+		public String Image;
+
+		public String getImage() {
+			return this.Image;
+		}
+
+		public List Ingredient1;
+
+		public List getIngredient1() {
+			return this.Ingredient1;
+		}
+
+		public List Ingredient2;
+
+		public List getIngredient2() {
+			return this.Ingredient2;
+		}
+
+		private String readString(ObjectInputStream dis) throws IOException {
+			String strReturn = null;
+			int length = 0;
+			length = dis.readInt();
+			if (length == -1) {
+				strReturn = null;
+			} else {
+				if (length > commonByteArray_TEST_API_TestApi.length) {
+					if (length < 1024 && commonByteArray_TEST_API_TestApi.length == 0) {
+						commonByteArray_TEST_API_TestApi = new byte[1024];
+					} else {
+						commonByteArray_TEST_API_TestApi = new byte[2 * length];
+					}
+				}
+				dis.readFully(commonByteArray_TEST_API_TestApi, 0, length);
+				strReturn = new String(commonByteArray_TEST_API_TestApi, 0, length, utf8Charset);
+			}
+			return strReturn;
+		}
+
+		private String readString(org.jboss.marshalling.Unmarshaller unmarshaller) throws IOException {
+			String strReturn = null;
+			int length = 0;
+			length = unmarshaller.readInt();
+			if (length == -1) {
+				strReturn = null;
+			} else {
+				if (length > commonByteArray_TEST_API_TestApi.length) {
+					if (length < 1024 && commonByteArray_TEST_API_TestApi.length == 0) {
+						commonByteArray_TEST_API_TestApi = new byte[1024];
+					} else {
+						commonByteArray_TEST_API_TestApi = new byte[2 * length];
+					}
+				}
+				unmarshaller.readFully(commonByteArray_TEST_API_TestApi, 0, length);
+				strReturn = new String(commonByteArray_TEST_API_TestApi, 0, length, utf8Charset);
+			}
+			return strReturn;
+		}
+
+		private void writeString(String str, ObjectOutputStream dos) throws IOException {
+			if (str == null) {
+				dos.writeInt(-1);
+			} else {
+				byte[] byteArray = str.getBytes(utf8Charset);
+				dos.writeInt(byteArray.length);
+				dos.write(byteArray);
+			}
+		}
+
+		private void writeString(String str, org.jboss.marshalling.Marshaller marshaller) throws IOException {
+			if (str == null) {
+				marshaller.writeInt(-1);
+			} else {
+				byte[] byteArray = str.getBytes(utf8Charset);
+				marshaller.writeInt(byteArray.length);
+				marshaller.write(byteArray);
+			}
+		}
+
+		public void readData(ObjectInputStream dis) {
+
+			synchronized (commonByteArrayLock_TEST_API_TestApi) {
+
+				try {
+
+					int length = 0;
+
+					this.IdDrink = dis.readInt();
+
+					this.Name = readString(dis);
+
+					this.Category = readString(dis);
+
+					this.Alcoholic = readString(dis);
+
+					this.Glass = readString(dis);
+
+					this.Instructions = readString(dis);
+
+					this.Image = readString(dis);
+
+					this.Ingredient1 = (List) dis.readObject();
+
+					this.Ingredient2 = (List) dis.readObject();
+
+				} catch (IOException e) {
+					throw new RuntimeException(e);
+
+				} catch (ClassNotFoundException eCNFE) {
+					throw new RuntimeException(eCNFE);
+
+				}
+
+			}
+
+		}
+
+		public void readData(org.jboss.marshalling.Unmarshaller dis) {
+
+			synchronized (commonByteArrayLock_TEST_API_TestApi) {
+
+				try {
+
+					int length = 0;
+
+					this.IdDrink = dis.readInt();
+
+					this.Name = readString(dis);
+
+					this.Category = readString(dis);
+
+					this.Alcoholic = readString(dis);
+
+					this.Glass = readString(dis);
+
+					this.Instructions = readString(dis);
+
+					this.Image = readString(dis);
+
+					this.Ingredient1 = (List) dis.readObject();
+
+					this.Ingredient2 = (List) dis.readObject();
+
+				} catch (IOException e) {
+					throw new RuntimeException(e);
+
+				} catch (ClassNotFoundException eCNFE) {
+					throw new RuntimeException(eCNFE);
+
+				}
+
+			}
+
+		}
+
+		public void writeData(ObjectOutputStream dos) {
+			try {
+
+				// int
+
+				dos.writeInt(this.IdDrink);
+
+				// String
+
+				writeString(this.Name, dos);
+
+				// String
+
+				writeString(this.Category, dos);
+
+				// String
+
+				writeString(this.Alcoholic, dos);
+
+				// String
+
+				writeString(this.Glass, dos);
+
+				// String
+
+				writeString(this.Instructions, dos);
+
+				// String
+
+				writeString(this.Image, dos);
+
+				// List
+
+				dos.writeObject(this.Ingredient1);
+
+				// List
+
+				dos.writeObject(this.Ingredient2);
+
+			} catch (IOException e) {
+				throw new RuntimeException(e);
+			}
+
+		}
+
+		public void writeData(org.jboss.marshalling.Marshaller dos) {
+			try {
+
+				// int
+
+				dos.writeInt(this.IdDrink);
+
+				// String
+
+				writeString(this.Name, dos);
+
+				// String
+
+				writeString(this.Category, dos);
+
+				// String
+
+				writeString(this.Alcoholic, dos);
+
+				// String
+
+				writeString(this.Glass, dos);
+
+				// String
+
+				writeString(this.Instructions, dos);
+
+				// String
+
+				writeString(this.Image, dos);
+
+				// List
+
+				dos.writeObject(this.Ingredient1);
+
+				// List
+
+				dos.writeObject(this.Ingredient2);
+
+			} catch (IOException e) {
+				throw new RuntimeException(e);
+			}
+
+		}
+
+		public String toString() {
+
+			StringBuilder sb = new StringBuilder();
+			sb.append(super.toString());
+			sb.append("[");
+			sb.append("IdDrink=" + String.valueOf(IdDrink));
+			sb.append(",Name=" + Name);
+			sb.append(",Category=" + Category);
+			sb.append(",Alcoholic=" + Alcoholic);
+			sb.append(",Glass=" + Glass);
+			sb.append(",Instructions=" + Instructions);
+			sb.append(",Image=" + Image);
+			sb.append(",Ingredient1=" + String.valueOf(Ingredient1));
+			sb.append(",Ingredient2=" + String.valueOf(Ingredient2));
 			sb.append("]");
 
 			return sb.toString();
@@ -1051,6 +2681,223 @@ public class TestApi implements TalendJob {
 				row3Struct row3 = new row3Struct();
 				row1Struct row1 = new row1Struct();
 				row2Struct row2 = new row2Struct();
+				testStruct test = new testStruct();
+				testStruct row4 = test;
+				row5Struct row5 = new row5Struct();
+				row6Struct row6 = new row6Struct();
+
+				/**
+				 * [tFileOutputExcel_1 begin ] start
+				 */
+
+				ok_Hash.put("tFileOutputExcel_1", false);
+				start_Hash.put("tFileOutputExcel_1", System.currentTimeMillis());
+
+				currentComponent = "tFileOutputExcel_1";
+
+				if (execStat) {
+					runStat.updateStatOnConnection(resourceMap, iterateId, 0, 0, "row5");
+				}
+
+				int tos_count_tFileOutputExcel_1 = 0;
+
+				int columnIndex_tFileOutputExcel_1 = 0;
+				boolean headerIsInserted_tFileOutputExcel_1 = false;
+
+				int nb_line_tFileOutputExcel_1 = 0;
+
+				String fileName_tFileOutputExcel_1 = "C:/Program Files (x86)/TOS_DI-8.0.1/studio/workspace/TEST_API/_output/Cocktail.xls";
+				java.io.File file_tFileOutputExcel_1 = new java.io.File(fileName_tFileOutputExcel_1);
+				boolean isFileGenerated_tFileOutputExcel_1 = true;
+//create directory only if not exists
+				java.io.File parentFile_tFileOutputExcel_1 = file_tFileOutputExcel_1.getParentFile();
+				if (parentFile_tFileOutputExcel_1 != null && !parentFile_tFileOutputExcel_1.exists()) {
+
+					parentFile_tFileOutputExcel_1.mkdirs();
+
+				}
+
+				jxl.write.WritableWorkbook writeableWorkbook_tFileOutputExcel_1 = null;
+				jxl.write.WritableSheet writableSheet_tFileOutputExcel_1 = null;
+
+				jxl.WorkbookSettings workbookSettings_tFileOutputExcel_1 = new jxl.WorkbookSettings();
+				workbookSettings_tFileOutputExcel_1.setEncoding("ISO-8859-15");
+				writeableWorkbook_tFileOutputExcel_1 = new jxl.write.biff.WritableWorkbookImpl(
+						new java.io.BufferedOutputStream(new java.io.FileOutputStream(fileName_tFileOutputExcel_1)),
+						true, workbookSettings_tFileOutputExcel_1);
+
+				writableSheet_tFileOutputExcel_1 = writeableWorkbook_tFileOutputExcel_1.getSheet("Sheet1");
+				if (writableSheet_tFileOutputExcel_1 == null) {
+					writableSheet_tFileOutputExcel_1 = writeableWorkbook_tFileOutputExcel_1.createSheet("Sheet1",
+							writeableWorkbook_tFileOutputExcel_1.getNumberOfSheets());
+				}
+
+				// modif start
+				int startRowNum_tFileOutputExcel_1 = writableSheet_tFileOutputExcel_1.getRows();
+				// modif end
+
+				int[] fitWidth_tFileOutputExcel_1 = new int[8];
+				for (int i_tFileOutputExcel_1 = 0; i_tFileOutputExcel_1 < 8; i_tFileOutputExcel_1++) {
+					int fitCellViewSize_tFileOutputExcel_1 = writableSheet_tFileOutputExcel_1
+							.getColumnView(i_tFileOutputExcel_1).getSize();
+					fitWidth_tFileOutputExcel_1[i_tFileOutputExcel_1] = fitCellViewSize_tFileOutputExcel_1 / 256;
+					if (fitCellViewSize_tFileOutputExcel_1 % 256 != 0) {
+						fitWidth_tFileOutputExcel_1[i_tFileOutputExcel_1] += 1;
+					}
+				}
+
+				if (startRowNum_tFileOutputExcel_1 == 0) {
+					// modif end
+					// modif start
+					writableSheet_tFileOutputExcel_1
+							.addCell(new jxl.write.Label(0, nb_line_tFileOutputExcel_1, "IdDrink"));
+					// modif end
+					fitWidth_tFileOutputExcel_1[0] = fitWidth_tFileOutputExcel_1[0] > 7 ? fitWidth_tFileOutputExcel_1[0]
+							: 7;
+					// modif start
+					writableSheet_tFileOutputExcel_1
+							.addCell(new jxl.write.Label(1, nb_line_tFileOutputExcel_1, "Name"));
+					// modif end
+					fitWidth_tFileOutputExcel_1[1] = fitWidth_tFileOutputExcel_1[1] > 4 ? fitWidth_tFileOutputExcel_1[1]
+							: 4;
+					// modif start
+					writableSheet_tFileOutputExcel_1
+							.addCell(new jxl.write.Label(2, nb_line_tFileOutputExcel_1, "Category"));
+					// modif end
+					fitWidth_tFileOutputExcel_1[2] = fitWidth_tFileOutputExcel_1[2] > 8 ? fitWidth_tFileOutputExcel_1[2]
+							: 8;
+					// modif start
+					writableSheet_tFileOutputExcel_1
+							.addCell(new jxl.write.Label(3, nb_line_tFileOutputExcel_1, "Alcoholic"));
+					// modif end
+					fitWidth_tFileOutputExcel_1[3] = fitWidth_tFileOutputExcel_1[3] > 9 ? fitWidth_tFileOutputExcel_1[3]
+							: 9;
+					// modif start
+					writableSheet_tFileOutputExcel_1
+							.addCell(new jxl.write.Label(4, nb_line_tFileOutputExcel_1, "Glass"));
+					// modif end
+					fitWidth_tFileOutputExcel_1[4] = fitWidth_tFileOutputExcel_1[4] > 5 ? fitWidth_tFileOutputExcel_1[4]
+							: 5;
+					// modif start
+					writableSheet_tFileOutputExcel_1
+							.addCell(new jxl.write.Label(5, nb_line_tFileOutputExcel_1, "Instructions"));
+					// modif end
+					fitWidth_tFileOutputExcel_1[5] = fitWidth_tFileOutputExcel_1[5] > 12
+							? fitWidth_tFileOutputExcel_1[5]
+							: 12;
+					// modif start
+					writableSheet_tFileOutputExcel_1
+							.addCell(new jxl.write.Label(6, nb_line_tFileOutputExcel_1, "Image"));
+					// modif end
+					fitWidth_tFileOutputExcel_1[6] = fitWidth_tFileOutputExcel_1[6] > 5 ? fitWidth_tFileOutputExcel_1[6]
+							: 5;
+					// modif start
+					writableSheet_tFileOutputExcel_1
+							.addCell(new jxl.write.Label(7, nb_line_tFileOutputExcel_1, "IngredientList"));
+					// modif end
+					fitWidth_tFileOutputExcel_1[7] = fitWidth_tFileOutputExcel_1[7] > 14
+							? fitWidth_tFileOutputExcel_1[7]
+							: 14;
+					nb_line_tFileOutputExcel_1++;
+					headerIsInserted_tFileOutputExcel_1 = true;
+				}
+
+				/**
+				 * [tFileOutputExcel_1 begin ] stop
+				 */
+
+				/**
+				 * [tDBOutput_2 begin ] start
+				 */
+
+				ok_Hash.put("tDBOutput_2", false);
+				start_Hash.put("tDBOutput_2", System.currentTimeMillis());
+
+				currentComponent = "tDBOutput_2";
+
+				if (execStat) {
+					runStat.updateStatOnConnection(resourceMap, iterateId, 0, 0, "row6");
+				}
+
+				int tos_count_tDBOutput_2 = 0;
+
+				int nb_line_tDBOutput_2 = 0;
+				int nb_line_update_tDBOutput_2 = 0;
+				int nb_line_inserted_tDBOutput_2 = 0;
+				int nb_line_deleted_tDBOutput_2 = 0;
+				int nb_line_rejected_tDBOutput_2 = 0;
+
+				int deletedCount_tDBOutput_2 = 0;
+				int updatedCount_tDBOutput_2 = 0;
+				int insertedCount_tDBOutput_2 = 0;
+				int rowsToCommitCount_tDBOutput_2 = 0;
+
+				String tableName_tDBOutput_2 = "Cocktail";
+				boolean whetherReject_tDBOutput_2 = false;
+
+				int batchSize_tDBOutput_2 = 10000;
+				int batchSizeCounter_tDBOutput_2 = 0;
+				int tmp_batchUpdateCount_tDBOutput_2 = 0;
+
+				java.sql.Connection conn_tDBOutput_2 = null;
+
+				java.lang.Class.forName("org.sqlite.JDBC");
+				String url_tDBOutput_2 = "jdbc:sqlite:" + "/" + "C:/Users/totog/Cocktails.db";
+
+				conn_tDBOutput_2 = java.sql.DriverManager.getConnection(url_tDBOutput_2);
+				resourceMap.put("conn_tDBOutput_2", conn_tDBOutput_2);
+				conn_tDBOutput_2.setAutoCommit(false);
+				int commitEvery_tDBOutput_2 = 10000;
+				int commitCounter_tDBOutput_2 = 0;
+
+				java.sql.DatabaseMetaData dbMetaData_tDBOutput_2 = conn_tDBOutput_2.getMetaData();
+				boolean whetherExist_tDBOutput_2 = false;
+				try (java.sql.ResultSet rsTable_tDBOutput_2 = dbMetaData_tDBOutput_2.getTables(null, null, null,
+						new String[] { "TABLE" })) {
+					while (rsTable_tDBOutput_2.next()) {
+						String table_tDBOutput_2 = rsTable_tDBOutput_2.getString("TABLE_NAME");
+						if (table_tDBOutput_2.equalsIgnoreCase("Cocktail")) {
+							whetherExist_tDBOutput_2 = true;
+							break;
+						}
+					}
+				}
+				if (whetherExist_tDBOutput_2) {
+					try (java.sql.Statement stmtDrop_tDBOutput_2 = conn_tDBOutput_2.createStatement()) {
+						stmtDrop_tDBOutput_2.execute("DROP TABLE \"" + tableName_tDBOutput_2 + "\"");
+					}
+				}
+				try (java.sql.Statement stmtCreate_tDBOutput_2 = conn_tDBOutput_2.createStatement()) {
+					stmtCreate_tDBOutput_2.execute("CREATE TABLE \"" + tableName_tDBOutput_2
+							+ "\"(\"IdDrink\" INT  not null ,\"Name\" VARCHAR(255)  ,\"Category\" VARCHAR(255)  ,\"Alcoholic\" VARCHAR(255)  ,\"Glass\" VARCHAR(255)  ,\"Instructions\" VARCHAR(9999)  ,\"Image\" VARCHAR(9999)  ,\"null\" VARCHAR(0)   not null ,primary key(\"IdDrink\"))");
+				}
+				String insert_tDBOutput_2 = "INSERT INTO \"" + "Cocktail"
+						+ "\" (\"IdDrink\",\"Name\",\"Category\",\"Alcoholic\",\"Glass\",\"Instructions\",\"Image\",\"null\") VALUES (?,?,?,?,?,?,?,?)";
+				java.sql.PreparedStatement pstmt_tDBOutput_2 = conn_tDBOutput_2.prepareStatement(insert_tDBOutput_2);
+				resourceMap.put("pstmt_tDBOutput_2", pstmt_tDBOutput_2);
+
+				/**
+				 * [tDBOutput_2 begin ] stop
+				 */
+
+				/**
+				 * [tReplicate_1 begin ] start
+				 */
+
+				ok_Hash.put("tReplicate_1", false);
+				start_Hash.put("tReplicate_1", System.currentTimeMillis());
+
+				currentComponent = "tReplicate_1";
+
+				if (execStat) {
+					runStat.updateStatOnConnection(resourceMap, iterateId, 0, 0, "row4");
+				}
+
+				int tos_count_tReplicate_1 = 0;
+
+				/**
+				 * [tReplicate_1 begin ] stop
+				 */
 
 				/**
 				 * [tLogRow_1 begin ] start
@@ -1062,7 +2909,7 @@ public class TestApi implements TalendJob {
 				currentComponent = "tLogRow_1";
 
 				if (execStat) {
-					runStat.updateStatOnConnection(resourceMap, iterateId, 0, 0, "row2");
+					runStat.updateStatOnConnection(resourceMap, iterateId, 0, 0, "test");
 				}
 
 				int tos_count_tLogRow_1 = 0;
@@ -1081,11 +2928,11 @@ public class TestApi implements TalendJob {
 
 					java.util.List<String[]> list = new java.util.ArrayList<String[]>();
 
-					int[] colLengths = new int[5];
+					int[] colLengths = new int[8];
 
 					public void addRow(String[] row) {
 
-						for (int i = 0; i < 5; i++) {
+						for (int i = 0; i < 8; i++) {
 							if (row[i] != null) {
 								colLengths[i] = Math.max(colLengths[i], row[i].length());
 							}
@@ -1112,11 +2959,11 @@ public class TestApi implements TalendJob {
 						// name
 						sb.append("|");
 						int k = 0;
-						for (k = 0; k < (totals + 4 - name.length()) / 2; k++) {
+						for (k = 0; k < (totals + 7 - name.length()) / 2; k++) {
 							sb.append(' ');
 						}
 						sb.append(name);
-						for (int i = 0; i < totals + 4 - name.length() - k; i++) {
+						for (int i = 0; i < totals + 7 - name.length() - k; i++) {
 							sb.append(' ');
 						}
 						sb.append("|\n");
@@ -1148,6 +2995,18 @@ public class TestApi implements TalendJob {
 
 							sbformat.append("|%5$-");
 							sbformat.append(colLengths[4]);
+							sbformat.append("s");
+
+							sbformat.append("|%6$-");
+							sbformat.append(colLengths[5]);
+							sbformat.append("s");
+
+							sbformat.append("|%7$-");
+							sbformat.append(colLengths[6]);
+							sbformat.append("s");
+
+							sbformat.append("|%8$-");
+							sbformat.append(colLengths[7]);
 							sbformat.append("s");
 
 							sbformat.append("|\n");
@@ -1185,9 +3044,21 @@ public class TestApi implements TalendJob {
 							sb.append(fillChars[2]);
 						}
 						sb.append(fillChars[3]);
+						for (int i = 0; i < colLengths[4] - fillChars[3].length() + 1; i++) {
+							sb.append(fillChars[2]);
+						}
+						sb.append(fillChars[3]);
+						for (int i = 0; i < colLengths[5] - fillChars[3].length() + 1; i++) {
+							sb.append(fillChars[2]);
+						}
+						sb.append(fillChars[3]);
+						for (int i = 0; i < colLengths[6] - fillChars[3].length() + 1; i++) {
+							sb.append(fillChars[2]);
+						}
+						sb.append(fillChars[3]);
 
 						// last column
-						for (int i = 0; i < colLengths[4] - fillChars[1].length() + 1; i++) {
+						for (int i = 0; i < colLengths[7] - fillChars[1].length() + 1; i++) {
 							sb.append(fillChars[2]);
 						}
 						sb.append(fillChars[1]);
@@ -1203,13 +3074,50 @@ public class TestApi implements TalendJob {
 				}
 				Util_tLogRow_1 util_tLogRow_1 = new Util_tLogRow_1();
 				util_tLogRow_1.setTableName("tLogRow_1");
-				util_tLogRow_1.addRow(new String[] { "Name", "Category", "Alcoholic", "Glass", "Instructions", });
+				util_tLogRow_1.addRow(new String[] { "IdDrink", "Name", "Category", "Alcoholic", "Glass",
+						"Instructions", "Image", "IngredientList", });
 				StringBuilder strBuffer_tLogRow_1 = null;
 				int nb_line_tLogRow_1 = 0;
 ///////////////////////    			
 
 				/**
 				 * [tLogRow_1 begin ] stop
+				 */
+
+				/**
+				 * [tMap_1 begin ] start
+				 */
+
+				ok_Hash.put("tMap_1", false);
+				start_Hash.put("tMap_1", System.currentTimeMillis());
+
+				currentComponent = "tMap_1";
+
+				if (execStat) {
+					runStat.updateStatOnConnection(resourceMap, iterateId, 0, 0, "row2");
+				}
+
+				int tos_count_tMap_1 = 0;
+
+// ###############################
+// # Lookup's keys initialization
+// ###############################        
+
+// ###############################
+// # Vars initialization
+				class Var__tMap_1__Struct {
+					List IngredientList;
+				}
+				Var__tMap_1__Struct Var__tMap_1 = new Var__tMap_1__Struct();
+// ###############################
+
+// ###############################
+// # Outputs initialization
+				testStruct test_tmp = new testStruct();
+// ###############################
+
+				/**
+				 * [tMap_1 begin ] stop
 				 */
 
 				/**
@@ -1643,6 +3551,35 @@ public class TestApi implements TalendJob {
 											row2 = new row2Struct();
 											nb_line_tExtractJSONFields_1++;
 											try {
+												jsonPath_tExtractJSONFields_1 = "$.idDrink";
+												compiledJsonPath_tExtractJSONFields_1 = jsonPathCache_tExtractJSONFields_1
+														.getCompiledJsonPath(jsonPath_tExtractJSONFields_1);
+
+												try {
+
+													value_tExtractJSONFields_1 = compiledJsonPath_tExtractJSONFields_1
+															.read(row_tExtractJSONFields_1);
+
+													if (value_tExtractJSONFields_1 != null
+															&& !value_tExtractJSONFields_1.toString().isEmpty()) {
+														row2.IdDrink = ParserUtils
+																.parseTo_int(value_tExtractJSONFields_1.toString());
+													} else {
+														row2.IdDrink =
+
+																0
+
+														;
+													}
+												} catch (com.jayway.jsonpath.PathNotFoundException e_tExtractJSONFields_1) {
+													globalMap.put("tExtractJSONFields_1_ERROR_MESSAGE",
+															e_tExtractJSONFields_1.getMessage());
+													row2.IdDrink =
+
+															0
+
+													;
+												}
 												jsonPath_tExtractJSONFields_1 = "$.strDrink";
 												compiledJsonPath_tExtractJSONFields_1 = jsonPathCache_tExtractJSONFields_1
 														.getCompiledJsonPath(jsonPath_tExtractJSONFields_1);
@@ -1758,6 +3695,87 @@ public class TestApi implements TalendJob {
 
 													;
 												}
+												jsonPath_tExtractJSONFields_1 = "$.strDrinkThumb";
+												compiledJsonPath_tExtractJSONFields_1 = jsonPathCache_tExtractJSONFields_1
+														.getCompiledJsonPath(jsonPath_tExtractJSONFields_1);
+
+												try {
+
+													value_tExtractJSONFields_1 = compiledJsonPath_tExtractJSONFields_1
+															.read(row_tExtractJSONFields_1);
+
+													row2.Image = value_tExtractJSONFields_1 == null ?
+
+															null
+
+															: value_tExtractJSONFields_1.toString();
+												} catch (com.jayway.jsonpath.PathNotFoundException e_tExtractJSONFields_1) {
+													globalMap.put("tExtractJSONFields_1_ERROR_MESSAGE",
+															e_tExtractJSONFields_1.getMessage());
+													row2.Image =
+
+															null
+
+													;
+												}
+												jsonPath_tExtractJSONFields_1 = "$.strIngredient1";
+												compiledJsonPath_tExtractJSONFields_1 = jsonPathCache_tExtractJSONFields_1
+														.getCompiledJsonPath(jsonPath_tExtractJSONFields_1);
+
+												try {
+
+													value_tExtractJSONFields_1 = compiledJsonPath_tExtractJSONFields_1
+															.read(row_tExtractJSONFields_1);
+
+													if (value_tExtractJSONFields_1 != null
+															&& !value_tExtractJSONFields_1.toString().isEmpty()) {
+														row2.Ingredient1 = ParserUtils.parseTo_List(
+																value_tExtractJSONFields_1.toString(), ",");
+													} else {
+														row2.Ingredient1 =
+
+																null
+
+														;
+													}
+												} catch (com.jayway.jsonpath.PathNotFoundException e_tExtractJSONFields_1) {
+													globalMap.put("tExtractJSONFields_1_ERROR_MESSAGE",
+															e_tExtractJSONFields_1.getMessage());
+													row2.Ingredient1 =
+
+															null
+
+													;
+												}
+												jsonPath_tExtractJSONFields_1 = "$.strIngredient2";
+												compiledJsonPath_tExtractJSONFields_1 = jsonPathCache_tExtractJSONFields_1
+														.getCompiledJsonPath(jsonPath_tExtractJSONFields_1);
+
+												try {
+
+													value_tExtractJSONFields_1 = compiledJsonPath_tExtractJSONFields_1
+															.read(row_tExtractJSONFields_1);
+
+													if (value_tExtractJSONFields_1 != null
+															&& !value_tExtractJSONFields_1.toString().isEmpty()) {
+														row2.Ingredient2 = ParserUtils.parseTo_List(
+																value_tExtractJSONFields_1.toString(), ",");
+													} else {
+														row2.Ingredient2 =
+
+																null
+
+														;
+													}
+												} catch (com.jayway.jsonpath.PathNotFoundException e_tExtractJSONFields_1) {
+													globalMap.put("tExtractJSONFields_1_ERROR_MESSAGE",
+															e_tExtractJSONFields_1.getMessage());
+													row2.Ingredient2 =
+
+															null
+
+													;
+												}
 											} catch (java.lang.Exception ex_tExtractJSONFields_1) {
 												globalMap.put("tExtractJSONFields_1_ERROR_MESSAGE",
 														ex_tExtractJSONFields_1.getMessage());
@@ -1790,10 +3808,10 @@ public class TestApi implements TalendJob {
 										if (row2 != null) {
 
 											/**
-											 * [tLogRow_1 main ] start
+											 * [tMap_1 main ] start
 											 */
 
-											currentComponent = "tLogRow_1";
+											currentComponent = "tMap_1";
 
 											if (execStat) {
 												runStat.updateStatOnConnection(iterateId, 1, 1
@@ -1803,67 +3821,612 @@ public class TestApi implements TalendJob {
 												);
 											}
 
+											boolean hasCasePrimitiveKeyWithNull_tMap_1 = false;
+
+											// ###############################
+											// # Input tables (lookups)
+											boolean rejectedInnerJoin_tMap_1 = false;
+											boolean mainRowRejected_tMap_1 = false;
+
+											// ###############################
+											{ // start of Var scope
+
+												// ###############################
+												// # Vars tables
+
+												Var__tMap_1__Struct Var = Var__tMap_1;
+												Var.IngredientList = row2.Ingredient1 + "," + row2.Ingredient2;// ###############################
+												// ###############################
+												// # Output tables
+
+												test = null;
+
+// # Output table : 'test'
+												test_tmp.IdDrink = 0;
+												test_tmp.Name = null;
+												test_tmp.Category = null;
+												test_tmp.Alcoholic = null;
+												test_tmp.Glass = null;
+												test_tmp.Instructions = null;
+												test_tmp.Image = null;
+												test_tmp.IngredientList = Var.IngredientList;
+												test = test_tmp;
+// ###############################
+
+											} // end of Var scope
+
+											rejectedInnerJoin_tMap_1 = false;
+
+											tos_count_tMap_1++;
+
+											/**
+											 * [tMap_1 main ] stop
+											 */
+
+											/**
+											 * [tMap_1 process_data_begin ] start
+											 */
+
+											currentComponent = "tMap_1";
+
+											/**
+											 * [tMap_1 process_data_begin ] stop
+											 */
+// Start of branch "test"
+											if (test != null) {
+
+												/**
+												 * [tLogRow_1 main ] start
+												 */
+
+												currentComponent = "tLogRow_1";
+
+												if (execStat) {
+													runStat.updateStatOnConnection(iterateId, 1, 1
+
+															, "test"
+
+													);
+												}
+
 ///////////////////////		
 
-											String[] row_tLogRow_1 = new String[5];
+												String[] row_tLogRow_1 = new String[8];
 
-											if (row2.Name != null) { //
-												row_tLogRow_1[0] = String.valueOf(row2.Name);
+												row_tLogRow_1[0] = String.valueOf(test.IdDrink);
 
-											} //
+												if (test.Name != null) { //
+													row_tLogRow_1[1] = String.valueOf(test.Name);
 
-											if (row2.Category != null) { //
-												row_tLogRow_1[1] = String.valueOf(row2.Category);
+												} //
 
-											} //
+												if (test.Category != null) { //
+													row_tLogRow_1[2] = String.valueOf(test.Category);
 
-											if (row2.Alcoholic != null) { //
-												row_tLogRow_1[2] = String.valueOf(row2.Alcoholic);
+												} //
 
-											} //
+												if (test.Alcoholic != null) { //
+													row_tLogRow_1[3] = String.valueOf(test.Alcoholic);
 
-											if (row2.Glass != null) { //
-												row_tLogRow_1[3] = String.valueOf(row2.Glass);
+												} //
 
-											} //
+												if (test.Glass != null) { //
+													row_tLogRow_1[4] = String.valueOf(test.Glass);
 
-											if (row2.Instructions != null) { //
-												row_tLogRow_1[4] = String.valueOf(row2.Instructions);
+												} //
 
-											} //
+												if (test.Instructions != null) { //
+													row_tLogRow_1[5] = String.valueOf(test.Instructions);
 
-											util_tLogRow_1.addRow(row_tLogRow_1);
-											nb_line_tLogRow_1++;
+												} //
+
+												if (test.Image != null) { //
+													row_tLogRow_1[6] = String.valueOf(test.Image);
+
+												} //
+
+												if (test.IngredientList != null) { //
+													row_tLogRow_1[7] = String.valueOf(test.IngredientList);
+
+												} //
+
+												util_tLogRow_1.addRow(row_tLogRow_1);
+												nb_line_tLogRow_1++;
 //////
 
 //////                    
 
 ///////////////////////    			
 
-											tos_count_tLogRow_1++;
+												row4 = test;
+
+												tos_count_tLogRow_1++;
+
+												/**
+												 * [tLogRow_1 main ] stop
+												 */
+
+												/**
+												 * [tLogRow_1 process_data_begin ] start
+												 */
+
+												currentComponent = "tLogRow_1";
+
+												/**
+												 * [tLogRow_1 process_data_begin ] stop
+												 */
+
+												/**
+												 * [tReplicate_1 main ] start
+												 */
+
+												currentComponent = "tReplicate_1";
+
+												if (execStat) {
+													runStat.updateStatOnConnection(iterateId, 1, 1
+
+															, "row4"
+
+													);
+												}
+
+												row5 = new row5Struct();
+
+												row5.IdDrink = row4.IdDrink;
+												row5.Name = row4.Name;
+												row5.Category = row4.Category;
+												row5.Alcoholic = row4.Alcoholic;
+												row5.Glass = row4.Glass;
+												row5.Instructions = row4.Instructions;
+												row5.Image = row4.Image;
+												row5.IngredientList = row4.IngredientList;
+												row6 = new row6Struct();
+
+												row6.IdDrink = row4.IdDrink;
+												row6.Name = row4.Name;
+												row6.Category = row4.Category;
+												row6.Alcoholic = row4.Alcoholic;
+												row6.Glass = row4.Glass;
+												row6.Instructions = row4.Instructions;
+												row6.Image = row4.Image;
+												row6.IngredientList = row4.IngredientList;
+
+												tos_count_tReplicate_1++;
+
+												/**
+												 * [tReplicate_1 main ] stop
+												 */
+
+												/**
+												 * [tReplicate_1 process_data_begin ] start
+												 */
+
+												currentComponent = "tReplicate_1";
+
+												/**
+												 * [tReplicate_1 process_data_begin ] stop
+												 */
+
+												/**
+												 * [tFileOutputExcel_1 main ] start
+												 */
+
+												currentComponent = "tFileOutputExcel_1";
+
+												if (execStat) {
+													runStat.updateStatOnConnection(iterateId, 1, 1
+
+															, "row5"
+
+													);
+												}
+
+//modif start
+
+												columnIndex_tFileOutputExcel_1 = 0;
+
+												jxl.write.WritableCell cell_0_tFileOutputExcel_1 = new jxl.write.Number(
+														columnIndex_tFileOutputExcel_1,
+														startRowNum_tFileOutputExcel_1 + nb_line_tFileOutputExcel_1,
+
+//modif end
+														row5.IdDrink);
+//modif start					
+												// If we keep the cell format from the existing cell in sheet
+
+//modif ends							
+												writableSheet_tFileOutputExcel_1.addCell(cell_0_tFileOutputExcel_1);
+												int currentWith_0_tFileOutputExcel_1 = String.valueOf(
+														((jxl.write.Number) cell_0_tFileOutputExcel_1).getValue())
+														.trim().length();
+												currentWith_0_tFileOutputExcel_1 = currentWith_0_tFileOutputExcel_1 > 10
+														? 10
+														: currentWith_0_tFileOutputExcel_1;
+												fitWidth_tFileOutputExcel_1[0] = fitWidth_tFileOutputExcel_1[0] > currentWith_0_tFileOutputExcel_1
+														? fitWidth_tFileOutputExcel_1[0]
+														: currentWith_0_tFileOutputExcel_1 + 2;
+
+												if (row5.Name != null) {
+
+//modif start
+
+													columnIndex_tFileOutputExcel_1 = 1;
+
+													jxl.write.WritableCell cell_1_tFileOutputExcel_1 = new jxl.write.Label(
+															columnIndex_tFileOutputExcel_1,
+															startRowNum_tFileOutputExcel_1 + nb_line_tFileOutputExcel_1,
+
+//modif end
+															row5.Name);
+//modif start					
+													// If we keep the cell format from the existing cell in sheet
+
+//modif ends							
+													writableSheet_tFileOutputExcel_1.addCell(cell_1_tFileOutputExcel_1);
+													int currentWith_1_tFileOutputExcel_1 = cell_1_tFileOutputExcel_1
+															.getContents().trim().length();
+													fitWidth_tFileOutputExcel_1[1] = fitWidth_tFileOutputExcel_1[1] > currentWith_1_tFileOutputExcel_1
+															? fitWidth_tFileOutputExcel_1[1]
+															: currentWith_1_tFileOutputExcel_1 + 2;
+												}
+
+												if (row5.Category != null) {
+
+//modif start
+
+													columnIndex_tFileOutputExcel_1 = 2;
+
+													jxl.write.WritableCell cell_2_tFileOutputExcel_1 = new jxl.write.Label(
+															columnIndex_tFileOutputExcel_1,
+															startRowNum_tFileOutputExcel_1 + nb_line_tFileOutputExcel_1,
+
+//modif end
+															row5.Category);
+//modif start					
+													// If we keep the cell format from the existing cell in sheet
+
+//modif ends							
+													writableSheet_tFileOutputExcel_1.addCell(cell_2_tFileOutputExcel_1);
+													int currentWith_2_tFileOutputExcel_1 = cell_2_tFileOutputExcel_1
+															.getContents().trim().length();
+													fitWidth_tFileOutputExcel_1[2] = fitWidth_tFileOutputExcel_1[2] > currentWith_2_tFileOutputExcel_1
+															? fitWidth_tFileOutputExcel_1[2]
+															: currentWith_2_tFileOutputExcel_1 + 2;
+												}
+
+												if (row5.Alcoholic != null) {
+
+//modif start
+
+													columnIndex_tFileOutputExcel_1 = 3;
+
+													jxl.write.WritableCell cell_3_tFileOutputExcel_1 = new jxl.write.Label(
+															columnIndex_tFileOutputExcel_1,
+															startRowNum_tFileOutputExcel_1 + nb_line_tFileOutputExcel_1,
+
+//modif end
+															row5.Alcoholic);
+//modif start					
+													// If we keep the cell format from the existing cell in sheet
+
+//modif ends							
+													writableSheet_tFileOutputExcel_1.addCell(cell_3_tFileOutputExcel_1);
+													int currentWith_3_tFileOutputExcel_1 = cell_3_tFileOutputExcel_1
+															.getContents().trim().length();
+													fitWidth_tFileOutputExcel_1[3] = fitWidth_tFileOutputExcel_1[3] > currentWith_3_tFileOutputExcel_1
+															? fitWidth_tFileOutputExcel_1[3]
+															: currentWith_3_tFileOutputExcel_1 + 2;
+												}
+
+												if (row5.Glass != null) {
+
+//modif start
+
+													columnIndex_tFileOutputExcel_1 = 4;
+
+													jxl.write.WritableCell cell_4_tFileOutputExcel_1 = new jxl.write.Label(
+															columnIndex_tFileOutputExcel_1,
+															startRowNum_tFileOutputExcel_1 + nb_line_tFileOutputExcel_1,
+
+//modif end
+															row5.Glass);
+//modif start					
+													// If we keep the cell format from the existing cell in sheet
+
+//modif ends							
+													writableSheet_tFileOutputExcel_1.addCell(cell_4_tFileOutputExcel_1);
+													int currentWith_4_tFileOutputExcel_1 = cell_4_tFileOutputExcel_1
+															.getContents().trim().length();
+													fitWidth_tFileOutputExcel_1[4] = fitWidth_tFileOutputExcel_1[4] > currentWith_4_tFileOutputExcel_1
+															? fitWidth_tFileOutputExcel_1[4]
+															: currentWith_4_tFileOutputExcel_1 + 2;
+												}
+
+												if (row5.Instructions != null) {
+
+//modif start
+
+													columnIndex_tFileOutputExcel_1 = 5;
+
+													jxl.write.WritableCell cell_5_tFileOutputExcel_1 = new jxl.write.Label(
+															columnIndex_tFileOutputExcel_1,
+															startRowNum_tFileOutputExcel_1 + nb_line_tFileOutputExcel_1,
+
+//modif end
+															row5.Instructions);
+//modif start					
+													// If we keep the cell format from the existing cell in sheet
+
+//modif ends							
+													writableSheet_tFileOutputExcel_1.addCell(cell_5_tFileOutputExcel_1);
+													int currentWith_5_tFileOutputExcel_1 = cell_5_tFileOutputExcel_1
+															.getContents().trim().length();
+													fitWidth_tFileOutputExcel_1[5] = fitWidth_tFileOutputExcel_1[5] > currentWith_5_tFileOutputExcel_1
+															? fitWidth_tFileOutputExcel_1[5]
+															: currentWith_5_tFileOutputExcel_1 + 2;
+												}
+
+												if (row5.Image != null) {
+
+//modif start
+
+													columnIndex_tFileOutputExcel_1 = 6;
+
+													jxl.write.WritableCell cell_6_tFileOutputExcel_1 = new jxl.write.Label(
+															columnIndex_tFileOutputExcel_1,
+															startRowNum_tFileOutputExcel_1 + nb_line_tFileOutputExcel_1,
+
+//modif end
+															row5.Image);
+//modif start					
+													// If we keep the cell format from the existing cell in sheet
+
+//modif ends							
+													writableSheet_tFileOutputExcel_1.addCell(cell_6_tFileOutputExcel_1);
+													int currentWith_6_tFileOutputExcel_1 = cell_6_tFileOutputExcel_1
+															.getContents().trim().length();
+													fitWidth_tFileOutputExcel_1[6] = fitWidth_tFileOutputExcel_1[6] > currentWith_6_tFileOutputExcel_1
+															? fitWidth_tFileOutputExcel_1[6]
+															: currentWith_6_tFileOutputExcel_1 + 2;
+												}
+
+												if (row5.IngredientList != null) {
+
+//modif start
+
+													columnIndex_tFileOutputExcel_1 = 7;
+
+													jxl.write.WritableCell cell_7_tFileOutputExcel_1 = new jxl.write.Label(
+															columnIndex_tFileOutputExcel_1,
+															startRowNum_tFileOutputExcel_1 + nb_line_tFileOutputExcel_1,
+
+//modif end					
+															row5.IngredientList.toString());
+//modif start					
+													// If we keep the cell format from the existing cell in sheet
+
+//modif ends							
+													writableSheet_tFileOutputExcel_1.addCell(cell_7_tFileOutputExcel_1);
+													int currentWith_7_tFileOutputExcel_1 = cell_7_tFileOutputExcel_1
+															.getContents().trim().length();
+													fitWidth_tFileOutputExcel_1[7] = fitWidth_tFileOutputExcel_1[7] > currentWith_7_tFileOutputExcel_1
+															? fitWidth_tFileOutputExcel_1[7]
+															: currentWith_7_tFileOutputExcel_1 + 2;
+												}
+
+												nb_line_tFileOutputExcel_1++;
+
+												tos_count_tFileOutputExcel_1++;
+
+												/**
+												 * [tFileOutputExcel_1 main ] stop
+												 */
+
+												/**
+												 * [tFileOutputExcel_1 process_data_begin ] start
+												 */
+
+												currentComponent = "tFileOutputExcel_1";
+
+												/**
+												 * [tFileOutputExcel_1 process_data_begin ] stop
+												 */
+
+												/**
+												 * [tFileOutputExcel_1 process_data_end ] start
+												 */
+
+												currentComponent = "tFileOutputExcel_1";
+
+												/**
+												 * [tFileOutputExcel_1 process_data_end ] stop
+												 */
+
+												/**
+												 * [tDBOutput_2 main ] start
+												 */
+
+												currentComponent = "tDBOutput_2";
+
+												if (execStat) {
+													runStat.updateStatOnConnection(iterateId, 1, 1
+
+															, "row6"
+
+													);
+												}
+
+												whetherReject_tDBOutput_2 = false;
+												pstmt_tDBOutput_2.setInt(1, row6.IdDrink);
+
+												if (row6.Name == null) {
+													pstmt_tDBOutput_2.setNull(2, java.sql.Types.VARCHAR);
+												} else {
+													pstmt_tDBOutput_2.setString(2, row6.Name);
+												}
+
+												if (row6.Category == null) {
+													pstmt_tDBOutput_2.setNull(3, java.sql.Types.VARCHAR);
+												} else {
+													pstmt_tDBOutput_2.setString(3, row6.Category);
+												}
+
+												if (row6.Alcoholic == null) {
+													pstmt_tDBOutput_2.setNull(4, java.sql.Types.VARCHAR);
+												} else {
+													pstmt_tDBOutput_2.setString(4, row6.Alcoholic);
+												}
+
+												if (row6.Glass == null) {
+													pstmt_tDBOutput_2.setNull(5, java.sql.Types.VARCHAR);
+												} else {
+													pstmt_tDBOutput_2.setString(5, row6.Glass);
+												}
+
+												if (row6.Instructions == null) {
+													pstmt_tDBOutput_2.setNull(6, java.sql.Types.VARCHAR);
+												} else {
+													pstmt_tDBOutput_2.setString(6, row6.Instructions);
+												}
+
+												if (row6.Image == null) {
+													pstmt_tDBOutput_2.setNull(7, java.sql.Types.VARCHAR);
+												} else {
+													pstmt_tDBOutput_2.setString(7, row6.Image);
+												}
+
+												pstmt_tDBOutput_2.setObject(8, row6.IngredientList);
+
+												pstmt_tDBOutput_2.addBatch();
+												batchSizeCounter_tDBOutput_2++;
+												nb_line_tDBOutput_2++;
+												if ((batchSize_tDBOutput_2 > 0)
+														&& (batchSize_tDBOutput_2 <= batchSizeCounter_tDBOutput_2)) {
+													int[] status_tDBOutput_2 = null;
+													int countSum_tDBOutput_2 = 0;
+													try {
+														batchSizeCounter_tDBOutput_2 = 0;
+														status_tDBOutput_2 = pstmt_tDBOutput_2.executeBatch();
+														for (int countEach_tDBOutput_2 : status_tDBOutput_2) {
+															countSum_tDBOutput_2 += (countEach_tDBOutput_2 < 0 ? 0
+																	: countEach_tDBOutput_2);
+														}
+													} catch (java.sql.BatchUpdateException e) {
+														globalMap.put("tDBOutput_2_ERROR_MESSAGE", e.getMessage());
+														for (int countEach_tDBOutput_2 : e.getUpdateCounts()) {
+															countSum_tDBOutput_2 += (countEach_tDBOutput_2 < 0 ? 0
+																	: countEach_tDBOutput_2);
+														}
+														System.err.println(e.getMessage());
+													}
+													try {
+														tmp_batchUpdateCount_tDBOutput_2 = pstmt_tDBOutput_2
+																.getUpdateCount();
+													} catch (java.sql.SQLException e) {
+														globalMap.put("tDBOutput_2_ERROR_MESSAGE", e.getMessage());
+														System.err.println(e.getMessage());
+													}
+													tmp_batchUpdateCount_tDBOutput_2 = tmp_batchUpdateCount_tDBOutput_2 > countSum_tDBOutput_2
+															? tmp_batchUpdateCount_tDBOutput_2
+															: countSum_tDBOutput_2;
+													rowsToCommitCount_tDBOutput_2 += tmp_batchUpdateCount_tDBOutput_2;
+													insertedCount_tDBOutput_2 += tmp_batchUpdateCount_tDBOutput_2;
+												}
+												commitCounter_tDBOutput_2++;
+												if (commitEvery_tDBOutput_2 <= commitCounter_tDBOutput_2) {
+													try {
+														if (batchSizeCounter_tDBOutput_2 > 0) {
+															int countSum_tDBOutput_2 = 0;
+
+															for (int countEach_tDBOutput_2 : pstmt_tDBOutput_2
+																	.executeBatch()) {
+																countSum_tDBOutput_2 += (countEach_tDBOutput_2 < 0 ? 0
+																		: countEach_tDBOutput_2);
+															}
+															rowsToCommitCount_tDBOutput_2 += countSum_tDBOutput_2;
+
+															insertedCount_tDBOutput_2 += countSum_tDBOutput_2;
+
+															batchSizeCounter_tDBOutput_2 = 0;
+														}
+													} catch (java.sql.BatchUpdateException e) {
+														globalMap.put("tDBOutput_2_ERROR_MESSAGE", e.getMessage());
+														int countSum_tDBOutput_2 = 0;
+														for (int countEach_tDBOutput_2 : e.getUpdateCounts()) {
+															countSum_tDBOutput_2 += (countEach_tDBOutput_2 < 0 ? 0
+																	: countEach_tDBOutput_2);
+														}
+														rowsToCommitCount_tDBOutput_2 += countSum_tDBOutput_2;
+														insertedCount_tDBOutput_2 += countSum_tDBOutput_2;
+														System.err.println(e.getMessage());
+													}
+													if (rowsToCommitCount_tDBOutput_2 != 0) {
+
+													}
+													conn_tDBOutput_2.commit();
+													if (rowsToCommitCount_tDBOutput_2 != 0) {
+
+														rowsToCommitCount_tDBOutput_2 = 0;
+													}
+													commitCounter_tDBOutput_2 = 0;
+												}
+
+												tos_count_tDBOutput_2++;
+
+												/**
+												 * [tDBOutput_2 main ] stop
+												 */
+
+												/**
+												 * [tDBOutput_2 process_data_begin ] start
+												 */
+
+												currentComponent = "tDBOutput_2";
+
+												/**
+												 * [tDBOutput_2 process_data_begin ] stop
+												 */
+
+												/**
+												 * [tDBOutput_2 process_data_end ] start
+												 */
+
+												currentComponent = "tDBOutput_2";
+
+												/**
+												 * [tDBOutput_2 process_data_end ] stop
+												 */
+
+												/**
+												 * [tReplicate_1 process_data_end ] start
+												 */
+
+												currentComponent = "tReplicate_1";
+
+												/**
+												 * [tReplicate_1 process_data_end ] stop
+												 */
+
+												/**
+												 * [tLogRow_1 process_data_end ] start
+												 */
+
+												currentComponent = "tLogRow_1";
+
+												/**
+												 * [tLogRow_1 process_data_end ] stop
+												 */
+
+											} // End of branch "test"
 
 											/**
-											 * [tLogRow_1 main ] stop
+											 * [tMap_1 process_data_end ] start
 											 */
 
-											/**
-											 * [tLogRow_1 process_data_begin ] start
-											 */
-
-											currentComponent = "tLogRow_1";
+											currentComponent = "tMap_1";
 
 											/**
-											 * [tLogRow_1 process_data_begin ] stop
-											 */
-
-											/**
-											 * [tLogRow_1 process_data_end ] start
-											 */
-
-											currentComponent = "tLogRow_1";
-
-											/**
-											 * [tLogRow_1 process_data_end ] stop
+											 * [tMap_1 process_data_end ] stop
 											 */
 
 										} // End of branch "row2"
@@ -1975,6 +4538,27 @@ public class TestApi implements TalendJob {
 				 */
 
 				/**
+				 * [tMap_1 end ] start
+				 */
+
+				currentComponent = "tMap_1";
+
+// ###############################
+// # Lookup hashes releasing
+// ###############################      
+
+				if (execStat) {
+					runStat.updateStat(resourceMap, iterateId, 2, 0, "row2");
+				}
+
+				ok_Hash.put("tMap_1", true);
+				end_Hash.put("tMap_1", System.currentTimeMillis());
+
+				/**
+				 * [tMap_1 end ] stop
+				 */
+
+				/**
 				 * [tLogRow_1 end ] start
 				 */
 
@@ -1998,7 +4582,7 @@ public class TestApi implements TalendJob {
 ///////////////////////    			
 
 				if (execStat) {
-					runStat.updateStat(resourceMap, iterateId, 2, 0, "row2");
+					runStat.updateStat(resourceMap, iterateId, 2, 0, "test");
 				}
 
 				ok_Hash.put("tLogRow_1", true);
@@ -2006,6 +4590,120 @@ public class TestApi implements TalendJob {
 
 				/**
 				 * [tLogRow_1 end ] stop
+				 */
+
+				/**
+				 * [tReplicate_1 end ] start
+				 */
+
+				currentComponent = "tReplicate_1";
+
+				if (execStat) {
+					runStat.updateStat(resourceMap, iterateId, 2, 0, "row4");
+				}
+
+				ok_Hash.put("tReplicate_1", true);
+				end_Hash.put("tReplicate_1", System.currentTimeMillis());
+
+				/**
+				 * [tReplicate_1 end ] stop
+				 */
+
+				/**
+				 * [tFileOutputExcel_1 end ] start
+				 */
+
+				currentComponent = "tFileOutputExcel_1";
+
+				writeableWorkbook_tFileOutputExcel_1.write();
+				writeableWorkbook_tFileOutputExcel_1.close();
+				if (headerIsInserted_tFileOutputExcel_1 && nb_line_tFileOutputExcel_1 > 0) {
+					nb_line_tFileOutputExcel_1 = nb_line_tFileOutputExcel_1 - 1;
+				}
+				globalMap.put("tFileOutputExcel_1_NB_LINE", nb_line_tFileOutputExcel_1);
+
+				if (execStat) {
+					runStat.updateStat(resourceMap, iterateId, 2, 0, "row5");
+				}
+
+				ok_Hash.put("tFileOutputExcel_1", true);
+				end_Hash.put("tFileOutputExcel_1", System.currentTimeMillis());
+
+				/**
+				 * [tFileOutputExcel_1 end ] stop
+				 */
+
+				/**
+				 * [tDBOutput_2 end ] start
+				 */
+
+				currentComponent = "tDBOutput_2";
+
+				int[] status_tDBOutput_2 = null;
+				int countSum_tDBOutput_2 = 0;
+				try {
+					if (pstmt_tDBOutput_2 != null && batchSizeCounter_tDBOutput_2 > 0) {
+						status_tDBOutput_2 = pstmt_tDBOutput_2.executeBatch();
+						for (int countEach_tDBOutput_2 : status_tDBOutput_2) {
+							countSum_tDBOutput_2 += (countEach_tDBOutput_2 < 0 ? 0 : countEach_tDBOutput_2);
+						}
+					}
+				} catch (java.sql.BatchUpdateException e) {
+					globalMap.put("tDBOutput_2_ERROR_MESSAGE", e.getMessage());
+					for (int countEach_tDBOutput_2 : e.getUpdateCounts()) {
+						countSum_tDBOutput_2 += (countEach_tDBOutput_2 < 0 ? 0 : countEach_tDBOutput_2);
+					}
+					System.err.println(e.getMessage());
+				}
+				if (pstmt_tDBOutput_2 != null && batchSizeCounter_tDBOutput_2 > 0) {
+					try {
+						tmp_batchUpdateCount_tDBOutput_2 = pstmt_tDBOutput_2.getUpdateCount();
+					} catch (java.sql.SQLException e) {
+						globalMap.put("tDBOutput_2_ERROR_MESSAGE", e.getMessage());
+
+					}
+					tmp_batchUpdateCount_tDBOutput_2 = tmp_batchUpdateCount_tDBOutput_2 > countSum_tDBOutput_2
+							? tmp_batchUpdateCount_tDBOutput_2
+							: countSum_tDBOutput_2;
+					rowsToCommitCount_tDBOutput_2 += tmp_batchUpdateCount_tDBOutput_2;
+					insertedCount_tDBOutput_2 += tmp_batchUpdateCount_tDBOutput_2;
+				}
+				if (pstmt_tDBOutput_2 != null) {
+					pstmt_tDBOutput_2.close();
+					resourceMap.remove("pstmt_tDBOutput_2");
+				}
+				resourceMap.put("statementClosed_tDBOutput_2", true);
+				if (commitCounter_tDBOutput_2 > 0 && rowsToCommitCount_tDBOutput_2 != 0) {
+				}
+				conn_tDBOutput_2.commit();
+				if (commitCounter_tDBOutput_2 > 0 && rowsToCommitCount_tDBOutput_2 != 0) {
+					rowsToCommitCount_tDBOutput_2 = 0;
+				}
+				commitCounter_tDBOutput_2 = 0;
+				conn_tDBOutput_2.close();
+				resourceMap.put("finish_tDBOutput_2", true);
+
+				int rejectedCount_tDBOutput_2 = 0;
+				nb_line_deleted_tDBOutput_2 = nb_line_deleted_tDBOutput_2 + deletedCount_tDBOutput_2;
+				nb_line_update_tDBOutput_2 = nb_line_update_tDBOutput_2 + updatedCount_tDBOutput_2;
+				nb_line_inserted_tDBOutput_2 = nb_line_inserted_tDBOutput_2 + insertedCount_tDBOutput_2;
+				nb_line_rejected_tDBOutput_2 = nb_line_rejected_tDBOutput_2 + rejectedCount_tDBOutput_2;
+
+				globalMap.put("tDBOutput_2_NB_LINE", nb_line_tDBOutput_2);
+				globalMap.put("tDBOutput_2_NB_LINE_UPDATED", nb_line_update_tDBOutput_2);
+				globalMap.put("tDBOutput_2_NB_LINE_INSERTED", nb_line_inserted_tDBOutput_2);
+				globalMap.put("tDBOutput_2_NB_LINE_DELETED", nb_line_deleted_tDBOutput_2);
+				globalMap.put("tDBOutput_2_NB_LINE_REJECTED", nb_line_rejected_tDBOutput_2);
+
+				if (execStat) {
+					runStat.updateStat(resourceMap, iterateId, 2, 0, "row6");
+				}
+
+				ok_Hash.put("tDBOutput_2", true);
+				end_Hash.put("tDBOutput_2", System.currentTimeMillis());
+
+				/**
+				 * [tDBOutput_2 end ] stop
 				 */
 
 			} // end the resume
@@ -2055,6 +4753,16 @@ public class TestApi implements TalendJob {
 				 */
 
 				/**
+				 * [tMap_1 finally ] start
+				 */
+
+				currentComponent = "tMap_1";
+
+				/**
+				 * [tMap_1 finally ] stop
+				 */
+
+				/**
 				 * [tLogRow_1 finally ] start
 				 */
 
@@ -2062,6 +4770,59 @@ public class TestApi implements TalendJob {
 
 				/**
 				 * [tLogRow_1 finally ] stop
+				 */
+
+				/**
+				 * [tReplicate_1 finally ] start
+				 */
+
+				currentComponent = "tReplicate_1";
+
+				/**
+				 * [tReplicate_1 finally ] stop
+				 */
+
+				/**
+				 * [tFileOutputExcel_1 finally ] start
+				 */
+
+				currentComponent = "tFileOutputExcel_1";
+
+				/**
+				 * [tFileOutputExcel_1 finally ] stop
+				 */
+
+				/**
+				 * [tDBOutput_2 finally ] start
+				 */
+
+				currentComponent = "tDBOutput_2";
+
+				try {
+					if (resourceMap.get("statementClosed_tDBOutput_2") == null) {
+						java.sql.PreparedStatement pstmtToClose_tDBOutput_2 = null;
+						if ((pstmtToClose_tDBOutput_2 = (java.sql.PreparedStatement) resourceMap
+								.remove("pstmt_tDBOutput_2")) != null) {
+							pstmtToClose_tDBOutput_2.close();
+						}
+					}
+				} finally {
+					if (resourceMap.get("finish_tDBOutput_2") == null) {
+						java.sql.Connection ctn_tDBOutput_2 = null;
+						if ((ctn_tDBOutput_2 = (java.sql.Connection) resourceMap.get("conn_tDBOutput_2")) != null) {
+							try {
+								ctn_tDBOutput_2.close();
+							} catch (java.sql.SQLException sqlEx_tDBOutput_2) {
+								String errorMessage_tDBOutput_2 = "failed to close the connection in tDBOutput_2 :"
+										+ sqlEx_tDBOutput_2.getMessage();
+								System.err.println(errorMessage_tDBOutput_2);
+							}
+						}
+					}
+				}
+
+				/**
+				 * [tDBOutput_2 finally ] stop
 				 */
 
 			} catch (java.lang.Exception e) {
@@ -2442,6 +5203,6 @@ public class TestApi implements TalendJob {
 	ResumeUtil resumeUtil = null;
 }
 /************************************************************************************************
- * 75258 characters generated by Talend Open Studio for Data Integration on the
- * 19 janvier 2024, 11:39:42 CET
+ * 152607 characters generated by Talend Open Studio for Data Integration on the
+ * 26 janvier 2024, 14:54:21 CET
  ************************************************************************************************/
